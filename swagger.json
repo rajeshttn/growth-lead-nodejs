@@ -1,0 +1,84 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "My Lead Project CRUD",
+    "description": "My Lead Project Application API",
+    "license": {
+      "name": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "Leads",
+      "description": "API for leads in the system"
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/leads": {
+      "get": {
+        "tags": [
+          "Leads"
+        ],
+        "summary": "Get all leads in system",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Leads"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Lead": {
+      "required": [
+        "mobile",
+        "email"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "first_name": {
+          "type": "string"
+        },
+        "last_name": {
+          "type": "string"
+        },
+        "mobile": {
+          "type": "integer",
+          "uniqueItems": true
+        },
+        "location_type": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "communication": {
+          "type": "string"
+        }
+      }
+    },
+    "Leads": {
+      "type": "array",
+      "$ref": "#/definitions/Lead"
+    }
+  }
+}
