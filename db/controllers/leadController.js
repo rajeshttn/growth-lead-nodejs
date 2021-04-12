@@ -1,14 +1,27 @@
 var mongoose = require("mongoose");
 var Lead = require("../models/lead");
+var cache = require('../../cache')('LEADS-')
 
 var leadController = {};
 
 // Show list of leads
 leadController.list = function (req, res) {
-  Lead.find({}).exec(function (err, leads) {
-    if (err) return res.status(400).json({ status: "failure", reason: err.message })
-    res.json(leads)
-  });
+  cache.get('leads', (err, data) => {
+    console.log(">>>>>> cache >>>", err)
+    if (!data) {
+      Lead.find({}).exec(function (err, leads) {
+        console.log(">>>>>> From database >>>")
+        if (err) return res.status(400).json({ status: "failure", reason: err.message })
+        res.json(leads)
+        cache.set('leads', leads ,(err, data) => {
+        })
+      });
+    } else {
+      console.log(">>>>>> From cache >>>")
+      res.json(data)
+    }
+  })
+  
 };
 
 // Show lead by id
