@@ -11,6 +11,14 @@ PROJECT START STEPS:
     Pre-requisites:
     1. Install node, npm
     2. Install express (npm install express --save)
+    3. install memcached locally
+        $ curl -O https://memcached.org/files/memcached-1.5.0.tar.gz
+        $ tar -xvf memcached-1.5.0.tar.gz 
+        $ cd memcached-1.5.0
+        $ ./configure --prefix=/usr/local
+        $ make
+
+$ sudo make install
 
     Steps:
     1. To run this application, do the following:
@@ -20,3 +28,4 @@ PROJECT START STEPS:
             - npm start
     
     2. Go to http://localhost:8080 in your browser to view it.
+    3
