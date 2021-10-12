@@ -11,12 +11,13 @@ PROJECT START STEPS:
     Pre-requisites:
     1. Install node, npm
     2. Install express (npm install express --save)
-    3. install memcached locally
+    3. install memcached locally (https://www.journaldev.com/1/install-memcached-mac)
         $ curl -O https://memcached.org/files/memcached-1.5.0.tar.gz
         $ tar -xvf memcached-1.5.0.tar.gz 
         $ cd memcached-1.5.0
         $ ./configure --prefix=/usr/local
         $ make
+        $ memcached
 
 $ sudo make install
 

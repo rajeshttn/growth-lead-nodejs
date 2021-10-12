@@ -37,6 +37,7 @@ leadController.get = function (req, res) {
 leadController.save = function (req, res) {
   var lead = new Lead(req.body);
   lead.save(function (err) {
+    cache.clear('leads')
     if (err) return res.status(400).json({ status: "failure", reason: err.message })
     res.status(201).json(lead)
   });
@@ -48,6 +49,7 @@ leadController.update = function (req, res) {
   Lead.findOneAndUpdate({ id: req.params.id }, { $set: { first_name, last_name, mobile, email, location_type, location_string } }, function (err, lead) {
     if (err) return res.status(400).json({ status: "failure", reason: err.message })
     if (lead) return res.status(202).json({ status: "success" })
+    cache.clear('leads')
     res.status(404).json({})
   });
 };
@@ -57,6 +59,7 @@ leadController.delete = function (req, res) {
   Lead.remove({ id: req.params.id }, function (err, lead) {
     if (err) return res.status(400).json({ status: "failure", reason: err.message })
     if (lead.deletedCount) return res.json({ status: "success" })
+    cache.clear('leads')
     res.status(404).json({})
   });
 };
@@ -66,6 +69,7 @@ leadController.markLead = function (req, res) {
   Lead.findOneAndUpdate({ id: req.params.id }, { $set: { communication: req.body.communication, status: 'Contacted' } }, function (err, lead) {
     if (err) return res.status(400).json({ status: "failure", reason: err.message })
     if (lead) return res.status(202).json({ status: "Contacted", communication: req.body.communication })
+    cache.clear('leads')
     res.status(404).json({})
   });
 };

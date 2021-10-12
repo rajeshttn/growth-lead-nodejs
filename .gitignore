@@ -63,3 +63,4 @@ typings/
 .next
 
 memcached-1.5.0
+libevent-2.1.8-stable
